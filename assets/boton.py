@@ -77,4 +77,6 @@ class Boton:
                     self.accion()
             # Reiniciar el estado del click
             self.click_iniciado = False
+    def actualizar_texto(self, nuevo_texto):
+        self.texto = nuevo_texto
 

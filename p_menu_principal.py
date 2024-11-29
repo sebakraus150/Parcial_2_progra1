@@ -29,7 +29,7 @@ def menu_principal():
                 return "salir"
 
             for boton in botones:
-                boton.manejar_evento(evento)  # Manejar eventos de botones
+                boton.manejar_evento(evento)
 
         for boton in botones:
             boton.dibujar(PANTALLA)
