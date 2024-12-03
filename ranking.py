@@ -17,6 +17,11 @@ ranking = [
     },
     ]
 
+jugador_actual = {
+    "Nombre Jugador": "",
+    "Puntaje": 0
+}
+
 def guardar_puntuacion_ordenada(ranking: list, nombre: str, puntaje: int) -> None:
     '''
     ¿Qué hace? : Agrega un nuevo jugador al ranking con su puntaje, lo ordena en orden descendente por puntaje, y asegura que el ranking no exceda los 10 jugadores.
@@ -54,6 +59,8 @@ def gestionar_ranking(ranking: list, nombre: str, puntaje: int) -> None:
     '''
     guardar_puntuacion_ordenada(ranking, nombre, puntaje)
     mostrar_ranking(ranking)
+
+
 
 print("Ranking actualizado:")
 mostrar_ranking(ranking)

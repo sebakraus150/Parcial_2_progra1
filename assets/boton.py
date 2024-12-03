@@ -31,6 +31,17 @@ class Boton:
         self.fuente = pygame.font.Font(None, 36)
         self.click_iniciado = False  # Verifica donde inicia el click
 
+    def ajustar_texto(self):
+        """
+        Ajusta el texto del botón para que no exceda el ancho del botón.
+        Si es necesario, agrega '...' al final.
+        """
+        texto = self.texto
+        while self.fuente.size(texto)[0] > self.rect.width - 10:
+            texto = texto[:-1]
+        if texto != self.texto:
+            texto = texto[:-3] + "..."
+        return texto
 
     def dibujar(self, pantalla):
         '''
@@ -38,6 +49,7 @@ class Boton:
         ¿Qué recibe? :
             - pantalla : pygame.Surface > Superficie en la que se dibuja el botón.
         ¿Qué retorna? : None
+        
         '''
         posicion_mouse = pygame.mouse.get_pos()
 
@@ -50,13 +62,13 @@ class Boton:
         else:
             color_actual = self.color_normal
 
-        # Dibujar el botón
         pygame.draw.rect(pantalla, color_actual, self.rect)
 
-        # Renderizar el texto
-        superficie_texto = self.fuente.render(self.texto, True, self.color_texto)
+        texto_ajustado = self.ajustar_texto()
+        superficie_texto = self.fuente.render(texto_ajustado, True, self.color_texto)
         texto_rect = superficie_texto.get_rect(center=self.rect.center)
         pantalla.blit(superficie_texto, texto_rect)
+
 
     def manejar_evento(self, evento):
         '''
@@ -77,4 +89,6 @@ class Boton:
                     self.accion()
             # Reiniciar el estado del click
             self.click_iniciado = False
+    def actualizar_texto(self, nuevo_texto):
+        self.texto = nuevo_texto
 

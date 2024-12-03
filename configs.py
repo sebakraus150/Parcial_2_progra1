@@ -9,7 +9,7 @@ PANTALLA = pygame.display.set_mode((ANCHO, ALTO))
 pantalla_actual = "menu"
 
 # Cargar la imagen de fondo
-fondo = pygame.image.load("segundo_parcial/assets/imgs/fondo-campo.jpg")
+fondo = pygame.image.load("assets/imgs/fondo-campo.jpg")
 fondo = pygame.transform.scale(fondo, (ANCHO, ALTO))
 
 # Vidas

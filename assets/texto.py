@@ -19,7 +19,13 @@ class Texto:
         self.tamano_fuente = tamano_fuente
         self.color = color
         self.posicion = posicion
-        self.fuente = pygame.font.Font(ruta_fuente, tamano_fuente)
+
+        # Si no se proporciona ruta_fuente, usar la fuente predeterminada de Pygame
+        if ruta_fuente is None:
+            self.fuente = pygame.font.Font(None, tamano_fuente)
+        else:
+            self.fuente = pygame.font.Font(ruta_fuente, tamano_fuente)
+
         self.centrar_horizontal = centrar_horizontal
         self.ancho_maximo = ancho_maximo
         self.lineas = self.ajustar_texto()
