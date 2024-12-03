@@ -67,8 +67,8 @@ boton2 = Boton(350, 400, 300, 75, "Ver Ranking", COLOR_BLANCO, COBALT, BLUE, BLU
 boton3 = Boton(350, 550, 300, 75, "Opciones", COLOR_BLANCO, COBALT, BLUE, BLUE3, accion_boton_3)
 botones = [boton1, boton2, boton3]
 
-# Música de fondo
-pygame.mixer.music.load("assets/musica/Cancion_Fondo.mp3")
+#Musica de fondo
+pygame.mixer.music.load("segundo_parcial/assets/musica/Cancion_Fondo.mp3")
 pygame.mixer.music.play(-1)
 mixer.music.set_volume(0.3)
 

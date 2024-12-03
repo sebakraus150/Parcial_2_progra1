@@ -69,4 +69,3 @@ def pantalla_juego():
             boton.dibujar(PANTALLA)
 
         pygame.display.flip()
-
