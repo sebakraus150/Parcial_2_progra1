@@ -13,4 +13,3 @@ fondo = pygame.image.load("assets/imgs/fondo-campo.jpg")
 fondo = pygame.transform.scale(fondo, (ANCHO, ALTO))
 
 # Vidas
-vidas = 3

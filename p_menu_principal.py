@@ -5,95 +5,71 @@ from assets.texto import Texto
 from colores import *
 from p_juego_iniciado import *
 from p_ranking import *
-from p_fin import *
 from p_ingreso import *
 import pygame.mixer as mixer
-from ranking import gestionar_ranking
 
 pygame.init()
 mixer.init()
 
-# Funciones de pantalla
-def menu_principal():
-    '''
-    ¿Qué hace? : Muestra la pantalla del menú principal con botones interactivos y un texto destacado. Permite navegar entre pantallas o salir del juego.
-    ¿Qué recibe? : No recibe parámetros directamente, utiliza las variables globales configuradas (PANTALLA, botones, texto, fondo).
-    ¿Qué retorna? : 
-        - "salir" -> str > Si el usuario cierra la ventana.
-        - pantalla_actual -> str > El identificador de la pantalla actual a mostrar después del menú.
-    '''
-    while True:
-        PANTALLA.blit(fondo, (0, 0))
-        texto.dibujar(PANTALLA)
-
-        for evento in pygame.event.get():
-            if evento.type == pygame.QUIT:
-                return "salir"
-
-            for boton in botones:
-                boton.manejar_evento(evento)
-
-        for boton in botones:
-            boton.dibujar(PANTALLA)
-
-        pygame.display.flip()
-
-        if pantalla_actual != "menu":
-            return pantalla_actual
-
-# Instanciar el botón
-boton_aceptar = Boton(ANCHO // 2 - 50, ALTO // 2 + 60, 100, 40, "Aceptar", GREEN, BLUE, RED1, BLACK)
-
-# Acciones de los botones
-def accion_boton_1():
-    '''
-    ¿Qué hace? : Cambia la pantalla actual a "ingreso_nombre" y muestra la pantalla de ingreso de nombre.
-    ¿Qué recibe? : None
-    ¿Qué retorna? : None
-    '''
+# Funciones de los botones
+def menu_boton_1():
     global pantalla_actual
-    print("Cambiando a pantalla de ingreso de nombre")
-    pantalla_actual = "ingreso_nombre"  # Cambiar pantalla a ingreso de nombre
+    pantalla_actual = "ingreso_nombre"  # Cambiar a la pantalla de ingreso de nombre
 
-def accion_boton_2():
-    '''
-    ¿Qué hace? : Cambia la pantalla a "ranking" para mostrar la pantalla de ranking de jugaores 
-    ¿Qué recibe? : None
-    ¿Qué retorna? : None
-    '''
+def menu_boton_2():
     global pantalla_actual
-    print("Cambiando a pantalla de ranking")
     pantalla_actual = "ranking"
 
-def accion_boton_3(): #Falta
-    '''
-    ¿Qué hace? : 
-    ¿Qué recibe? : 
-    ¿Qué retorna? :
-    '''
-    print("Opciones (pendiente)")  
+def menu_boton_3():
+    print("Opciones (pendiente)")
 
 # Configurar la pantalla
 pygame.display.set_caption("Fulbito")
 
 # Instanciación de los botones
-boton1 = Boton(350, 250, 300, 75, "Iniciar Juego", COLOR_BLANCO, COBALT, BLUE, BLUE3, accion_boton_1)
-boton2 = Boton(350, 400, 300, 75, "Ver Ranking", COLOR_BLANCO, COBALT, BLUE, BLUE3, accion_boton_2)
-boton3 = Boton(350, 550, 300, 75, "Opciones", COLOR_BLANCO, COBALT, BLUE, BLUE3, accion_boton_3)
-botones = [boton1, boton2, boton3]
+menu_boton1 = Boton(350, 250, 300, 75, "Iniciar Juego", COLOR_BLANCO, COBALT, BLUE, BLUE3, menu_boton_1)
+menu_boton2 = Boton(350, 400, 300, 75, "Ver Ranking", COLOR_BLANCO, COBALT, BLUE, BLUE3, menu_boton_2)
+menu_boton3 = Boton(350, 550, 300, 75, "Opciones", COLOR_BLANCO, COBALT, BLUE, BLUE3, menu_boton_3)
+menu_botones = [menu_boton1, menu_boton2, menu_boton3]
 
-#Musica de fondo
+# Música de fondo
 pygame.mixer.music.load("assets/musica/Cancion_Fondo.mp3")
 pygame.mixer.music.play(-1)
 mixer.music.set_volume(0.3)
 
+# Texto en pantalla
 texto = Texto("FULBITO", tamano_fuente=200, color=COLOR_BLANCO, posicion=(100, 50), centrar_horizontal=True)
 
 # Control de pantallas
 pantalla_actual = "menu"
 
+def menu_principal():
+    '''Función del menú principal que muestra los botones y maneja los eventos de clic.'''
+    global pantalla_actual
+
+    while True:
+        PANTALLA.blit(fondo, (0, 0))  # Fondo del menú
+        texto.dibujar(PANTALLA)  # Texto "FULBITO"
+
+        # Manejo de eventos
+        for evento in pygame.event.get():
+            if evento.type == pygame.QUIT:
+                return "salir"  # Salir del juego
+            for boton in menu_botones:
+                boton.manejar_evento(evento)
+
+        # Dibujar los botones
+        for boton in menu_botones:
+            boton.dibujar(PANTALLA)
+
+        pygame.display.flip()
+
+        # Control de cambio de pantalla
+        if pantalla_actual != "menu":
+            return pantalla_actual
+
+# Ciclo principal del juego
 while pantalla_actual != "salir":
-    print(pantalla_actual) # quitar después
     if pantalla_actual == "menu":
         pantalla_actual = menu_principal()
     elif pantalla_actual == "ingreso_nombre":

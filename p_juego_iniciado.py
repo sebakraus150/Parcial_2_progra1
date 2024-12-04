@@ -7,7 +7,6 @@ from preguntas import preguntas
 from funciones_base import *
 from p_ranking import *
 from ranking import *
-import random
 
 def pantalla_juego():
     '''
@@ -15,6 +14,15 @@ def pantalla_juego():
     ¿Qué recibe? : No recibe parámetros directamente.
     ¿Qué retorna? : None
     '''
+    global jugador_actual
+    global vidas
+
+    print(jugador_actual)
+    print(vidas)
+
+    jugador_actual["Puntaje"]= 0
+    vidas = 3
+
     global contador_aciertos
     contador_aciertos = 0
 
@@ -26,6 +34,9 @@ def pantalla_juego():
 
     global puntaje
     puntaje = 0
+
+
+    global ranking
 
     def accion_boton(opcion):
         '''
@@ -40,31 +51,35 @@ def pantalla_juego():
         global dificultad
         global puntaje
         global ranking
+
         if modificar_vidas(pregunta["respuesta_correcta"], opcion):
             global contador_aciertos
+            puntaje = modificar_puntaje(puntaje, contador_aciertos)
             contador_aciertos += 1
             eliminar_pregunta(preguntas,dificultad, pregunta)
+            if contador_aciertos >= 15:
+                puntaje = modificar_puntaje(puntaje, contador_aciertos)
+                guardar_puntuacion_ordenada(ranking, jugador_actual)
+                jugador_actual["Puntaje"] = puntaje
+                global pantalla_actual
+                pantalla_actual = "ranking"
+            elif contador_aciertos >= 10:
+                dificultad = 2
+            elif contador_aciertos >= 5:
+                dificultad = 1
         else:
+            puntaje = modificar_puntaje(puntaje,contador_aciertos, False,1)
             vidas -= 1
         
-        if contador_aciertos >= 15:
-            puntaje = modificar_puntaje(puntaje, contador_aciertos)
-            jugador_actual["Puntaje"] = puntaje
-            guardar_puntuacion_ordenada(ranking, jugador_actual)
-            global pantalla_actual
-            pantalla_actual = pantalla_ranking()
-        elif contador_aciertos >= 10:
-            dificultad = 2
-        elif contador_aciertos >= 5:
-            dificultad = 1
+        
         
         pregunta = pregunta_aleatoria(preguntas,dificultad)
-        puntaje = modificar_puntaje(puntaje, contador_aciertos)
+        
         jugador_actual["Puntaje"] = puntaje
 
         if vidas < 1:
             guardar_puntuacion_ordenada(ranking, jugador_actual)
-            pantalla_actual = pantalla_ranking()
+            pantalla_actual = "ranking"
 
         boton1.actualizar_texto(pregunta["opciones"][1])
         boton2.actualizar_texto(pregunta["opciones"][2])
@@ -102,3 +117,6 @@ def pantalla_juego():
             boton.dibujar(PANTALLA)
 
         pygame.display.flip()
+    
+        if pantalla_actual == "ranking":
+                return pantalla_actual

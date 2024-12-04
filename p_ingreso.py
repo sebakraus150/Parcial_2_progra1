@@ -20,7 +20,7 @@ def mostrar_ventana_ingreso_nombre():
         '''
         global pantalla_actual
         jugador_actual["Nombre Jugador"] = nombre_usuario
-        pantalla_actual = pantalla_juego()
+        pantalla_actual = "juego"
     
     nombre_usuario = ""
     texto_ingreso = Texto("Ingresa tu nombre ", tamano_fuente=48, color=WHITE, posicion=(0,300), centrar_horizontal=True)
@@ -58,3 +58,5 @@ def mostrar_ventana_ingreso_nombre():
         boton_aceptar.dibujar(PANTALLA)
         
         pygame.display.update()
+        if pantalla_actual == "juego":
+            return pantalla_actual

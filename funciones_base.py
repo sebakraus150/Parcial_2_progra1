@@ -11,17 +11,20 @@ from configs import *
 
 # respuesta = input("Ingrese su respuesta: ")
 
-def modificar_puntaje(puntaje : int, aciertos: int):
-    if aciertos > 10:
-        puntaje+=3
-    elif aciertos >5:
-        puntaje+=2
+
+def modificar_puntaje(puntaje : int, aciertos: int, aumentar: bool=True, restar: int = 3):
+    if aumentar:
+        if aciertos > 10:
+            puntaje+=3
+        elif aciertos >5:
+            puntaje+=2
+        else:
+            puntaje+=1
     else:
-        puntaje+=1
-    
+        puntaje -= restar
+        if puntaje <= 0:
+            puntaje = 0
     return puntaje
-
-
 
 puntaje_inicial = 5
 
@@ -306,3 +309,17 @@ def leer_estadisticas():
 
         return 3, 0, 1
 
+def guardar_puntuacion_ordenada(ranking: list, nuevo_jugador: dict) -> None:
+    '''
+    ¿Qué hace? : Agrega un nuevo jugador al ranking con su puntaje, lo ordena en orden descendente por puntaje, y asegura que el ranking no exceda los 10 jugadores.
+    ¿Qué recibe? :
+        - ranking : list > Lista de diccionarios con los jugadores y sus puntajes actuales.
+        - nombre : str > Nombre del jugador a agregar.
+        - puntaje : int > Puntaje del jugador a agregar.
+    ¿Qué retorna? : None
+    '''
+    print("HOLA ESTO DENTRO")
+    ranking.append(nuevo_jugador)
+    ranking.sort(key=lambda x: x["Puntaje"], reverse=True)
+    if len(ranking) > 10:
+        ranking.pop(-1)
