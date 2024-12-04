@@ -3,7 +3,7 @@ from configs import *
 from assets.boton import Boton
 from assets.texto import Texto
 from colores import *
-from ranking import ranking
+from ranking import *
 
 def pantalla_ranking():
     '''
@@ -11,6 +11,9 @@ def pantalla_ranking():
     ¿Que recibe? : None
     ¿Que retonra? : Retorna "salir" si ce cierra la ventana de pygame.
     '''
+    print("----jugador_actual----")
+    print(jugador_actual)
+
     def botonazo():
         from p_menu_principal import menu_principal
         global pantalla_actual

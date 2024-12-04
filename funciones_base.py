@@ -11,35 +11,31 @@ from configs import *
 
 # respuesta = input("Ingrese su respuesta: ")
 
-# def modificar_puntaje(puntaje : int, respuesta_correcta : str):
-
-        
-
-#         if respuesta_correcta:
-
-#             puntaje += 1
-
-#         else:
-
-#             puntaje -= 1
+def modificar_puntaje(puntaje : int, aciertos: int):
+    if aciertos > 10:
+        puntaje+=3
+    elif aciertos >5:
+        puntaje+=2
+    else:
+        puntaje+=1
+    
+    return puntaje
 
 
-#             return puntaje
 
+puntaje_inicial = 5
 
-# puntaje_inicial = 5
+respuesta = True
 
-# respuesta = True
+puntaje_actualizado = modificar_puntaje(puntaje_inicial, respuesta)
 
-# puntaje_actualizado = modificar_puntaje(puntaje_inicial, respuesta)
+print(f"Puntaje actual {puntaje_actualizado}")
 
-# print(f"Puntaje actual {puntaje_actualizado}")
+respuesta = False
 
-# respuesta = False
+puntaje_actualizado = modificar_puntaje(puntaje_inicial, respuesta)
 
-# puntaje_actualizado = modificar_puntaje(puntaje_inicial, respuesta)
-
-# print(f"Puntaje actual {puntaje_actualizado}")
+print(f"Puntaje actual {puntaje_actualizado}")
 
 
 #2. Modificar vidas
@@ -79,6 +75,9 @@ def pregunta_aleatoria(preguntas : dict, dificultad: int=0):
     return pregunta_seleccionada
 
 
+def eliminar_pregunta(preguntas: list, dificultad: int, pregunta: dict):
+    if pregunta in preguntas[dificultad]:
+        preguntas[dificultad].remove(pregunta)
 
 # print(pregunta_aleatoria(preguntas))
 

@@ -248,7 +248,7 @@ preguntas = [
                 4: 'Artur Boruc'
             },
             'respuesta_correcta': 3
-        }
+        },
     ]
     #endregion
 ]

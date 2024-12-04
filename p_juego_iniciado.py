@@ -22,7 +22,10 @@ def pantalla_juego():
     pregunta = pregunta_aleatoria(preguntas,0)
 
     global dificultad
-    dificultad = 0
+    dificultad = 0 
+
+    global puntaje
+    puntaje = 0
 
     def accion_boton(opcion):
         '''
@@ -35,23 +38,32 @@ def pantalla_juego():
         global pregunta
         global vidas
         global dificultad
-
+        global puntaje
+        global ranking
         if modificar_vidas(pregunta["respuesta_correcta"], opcion):
             global contador_aciertos
             contador_aciertos += 1
+            eliminar_pregunta(preguntas,dificultad, pregunta)
         else:
             vidas -= 1
-        if contador_aciertos == 5:
-            dificultad = 1
-        elif contador_aciertos == 10:
-            dificultad = 2
-        elif contador_aciertos == 15:
+        
+        if contador_aciertos >= 15:
+            puntaje = modificar_puntaje(puntaje, contador_aciertos)
+            jugador_actual["Puntaje"] = puntaje
+            guardar_puntuacion_ordenada(ranking, jugador_actual)
             global pantalla_actual
             pantalla_actual = pantalla_ranking()
-
+        elif contador_aciertos >= 10:
+            dificultad = 2
+        elif contador_aciertos >= 5:
+            dificultad = 1
+        
         pregunta = pregunta_aleatoria(preguntas,dificultad)
+        puntaje = modificar_puntaje(puntaje, contador_aciertos)
+        jugador_actual["Puntaje"] = puntaje
 
         if vidas < 1:
+            guardar_puntuacion_ordenada(ranking, jugador_actual)
             pantalla_actual = pantalla_ranking()
 
         boton1.actualizar_texto(pregunta["opciones"][1])
@@ -60,6 +72,8 @@ def pantalla_juego():
         boton4.actualizar_texto(pregunta["opciones"][4])
 
         print(f"Aciertos:  {contador_aciertos}")
+        print(f"Puntaje:  {puntaje}")
+        print(jugador_actual)
 
 # Crear los botones pasando una lambda que ejecuta la acción cuando se hace click
     boton1 = Boton(150, 350, 350, 75, pregunta["opciones"][1], COLOR_BLANCO, COBALT, BLUE, BLUE3, lambda: accion_boton(1))

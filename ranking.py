@@ -22,7 +22,7 @@ jugador_actual = {
     "Puntaje": 0
 }
 
-def guardar_puntuacion_ordenada(ranking: list, nombre: str, puntaje: int) -> None:
+def guardar_puntuacion_ordenada(ranking: list, nuevo_jugador: dict) -> None:
     '''
     ¿Qué hace? : Agrega un nuevo jugador al ranking con su puntaje, lo ordena en orden descendente por puntaje, y asegura que el ranking no exceda los 10 jugadores.
     ¿Qué recibe? :
@@ -31,7 +31,7 @@ def guardar_puntuacion_ordenada(ranking: list, nombre: str, puntaje: int) -> Non
         - puntaje : int > Puntaje del jugador a agregar.
     ¿Qué retorna? : None
     '''
-    nuevo_jugador = {"Nombre Jugador": nombre, "Puntaje": puntaje}
+    print("HOLA ESTO DENTRO")
     ranking.append(nuevo_jugador)
     ranking.sort(key=lambda x: x["Puntaje"], reverse=True)
     if len(ranking) > 10:
