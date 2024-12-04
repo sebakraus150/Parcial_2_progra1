@@ -6,6 +6,11 @@ from colores import *
 from ranking import ranking
 
 def pantalla_ranking():
+    '''
+    ¿Que hace? : Muestra la pantalla del ranking de los 10 mejores puntajes, dibuja el fondo, los nombres, puntakes de los jugadores y un boton para volver al menu principal
+    ¿Que recibe? : None
+    ¿Que retonra? : Retorna "salir" si ce cierra la ventana de pygame.
+    '''
     def botonazo():
         from p_menu_principal import menu_principal
         global pantalla_actual

@@ -37,7 +37,7 @@ def mostrar_ventana_ingreso_nombre():
                 nombre_ingresado.actualizar_texto(nombre_usuario)
 
         # Dibujar elementos en pantalla
-        PANTALLA.fill(COLOR_GRIS)
+        PANTALLA.blit(fondo, (0, 0))
         texto_ingreso.dibujar(PANTALLA)
         
         pygame.draw.rect(PANTALLA, WHITE, rectangulo, 2)  # Dibujamos el rectángulo de texto

@@ -109,7 +109,7 @@ preguntas = [
                 3: 'River Plate',
                 4: 'Independiente'
             },
-            'respuesta_correcta': 2
+            'respuesta_correcta': 4
         },
         {
             'pregunta': '¿Qué club ha ganado más campeonatos nacionales en Argentina?',

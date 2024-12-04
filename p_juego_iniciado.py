@@ -9,17 +9,20 @@ from p_ranking import *
 from ranking import *
 import random
 
-print(f"las {vidas}")
-
 def pantalla_juego():
     '''
     ¿Qué hace? : Configura y muestra la pantalla principal del juego, incluyendo una pregunta aleatoria, botones con respuestas posibles y el contador de vidas. Controla las acciones del jugador.
     ¿Qué recibe? : No recibe parámetros directamente.
     ¿Qué retorna? : None
     '''
+    global contador_aciertos
+    contador_aciertos = 0
 
     global pregunta
-    pregunta = pregunta_aleatoria(preguntas[0])
+    pregunta = pregunta_aleatoria(preguntas,0)
+
+    global dificultad
+    dificultad = 0
 
     def accion_boton(opcion):
         '''
@@ -28,20 +31,36 @@ def pantalla_juego():
             - opcion : int, la opción seleccionada por el jugador.
         ¿Qué retorna? : None
         '''
+
         global pregunta
-        pregunta = pregunta_aleatoria(preguntas[0])
         global vidas
-        print(opcion)
-        vidas = modificar_vidas(vidas, pregunta["respuesta_correcta"], opcion)
-        if vidas < 1:
+        global dificultad
+
+        if modificar_vidas(pregunta["respuesta_correcta"], opcion):
+            global contador_aciertos
+            contador_aciertos += 1
+        else:
+            vidas -= 1
+        if contador_aciertos == 5:
+            dificultad = 1
+        elif contador_aciertos == 10:
+            dificultad = 2
+        elif contador_aciertos == 15:
             global pantalla_actual
             pantalla_actual = pantalla_ranking()
-                
+
+        pregunta = pregunta_aleatoria(preguntas,dificultad)
+
+        if vidas < 1:
+            pantalla_actual = pantalla_ranking()
+
         boton1.actualizar_texto(pregunta["opciones"][1])
         boton2.actualizar_texto(pregunta["opciones"][2])
         boton3.actualizar_texto(pregunta["opciones"][3])
         boton4.actualizar_texto(pregunta["opciones"][4])
-        print(jugador_actual)
+
+        print(f"Aciertos:  {contador_aciertos}")
+
 # Crear los botones pasando una lambda que ejecuta la acción cuando se hace click
     boton1 = Boton(150, 350, 350, 75, pregunta["opciones"][1], COLOR_BLANCO, COBALT, BLUE, BLUE3, lambda: accion_boton(1))
     boton2 = Boton(150, 500, 350, 75, pregunta["opciones"][2], COLOR_BLANCO, COBALT, BLUE, BLUE3, lambda: accion_boton(2))

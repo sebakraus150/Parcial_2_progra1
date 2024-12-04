@@ -46,16 +46,31 @@ boton_aceptar = Boton(ANCHO // 2 - 50, ALTO // 2 + 60, 100, 40, "Aceptar", GREEN
 
 # Acciones de los botones
 def accion_boton_1():
+    '''
+    ¿Qué hace? : Cambia la pantalla actual a "ingreso_nombre" y muestra la pantalla de ingreso de nombre.
+    ¿Qué recibe? : None
+    ¿Qué retorna? : None
+    '''
     global pantalla_actual
     print("Cambiando a pantalla de ingreso de nombre")
     pantalla_actual = "ingreso_nombre"  # Cambiar pantalla a ingreso de nombre
 
 def accion_boton_2():
+    '''
+    ¿Qué hace? : Cambia la pantalla a "ranking" para mostrar la pantalla de ranking de jugaores 
+    ¿Qué recibe? : None
+    ¿Qué retorna? : None
+    '''
     global pantalla_actual
     print("Cambiando a pantalla de ranking")
     pantalla_actual = "ranking"
 
-def accion_boton_3():
+def accion_boton_3(): #Falta
+    '''
+    ¿Qué hace? : 
+    ¿Qué recibe? : 
+    ¿Qué retorna? :
+    '''
     print("Opciones (pendiente)")  
 
 # Configurar la pantalla
@@ -68,7 +83,7 @@ boton3 = Boton(350, 550, 300, 75, "Opciones", COLOR_BLANCO, COBALT, BLUE, BLUE3,
 botones = [boton1, boton2, boton3]
 
 #Musica de fondo
-pygame.mixer.music.load("segundo_parcial/assets/musica/Cancion_Fondo.mp3")
+pygame.mixer.music.load("assets/musica/Cancion_Fondo.mp3")
 pygame.mixer.music.play(-1)
 mixer.music.set_volume(0.3)
 

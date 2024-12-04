@@ -44,13 +44,9 @@ from configs import *
 
 #2. Modificar vidas
 
-def modificar_vidas(vidas : int, respuesta_correcta : str, respuesta_usuario : str):
+def modificar_vidas(respuesta_correcta : str, respuesta_usuario : str):
     
-    if respuesta_usuario != respuesta_correcta:
-
-        vidas -= 1
-
-    return vidas
+    return respuesta_usuario == respuesta_correcta
     
 
 # vidas_iniciales = 5
@@ -76,9 +72,9 @@ def modificar_vidas(vidas : int, respuesta_correcta : str, respuesta_usuario : s
 
 
 
-def pregunta_aleatoria(preguntas : dict):
+def pregunta_aleatoria(preguntas : dict, dificultad: int=0):
 
-    pregunta_seleccionada = random.choice(preguntas)
+    pregunta_seleccionada = random.choice(preguntas[dificultad])
 
     return pregunta_seleccionada
 
