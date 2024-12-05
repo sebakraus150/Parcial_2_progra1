@@ -45,7 +45,7 @@ class Boton:
 
     def dibujar(self, pantalla):
         '''
-        ¿Qué hace? : Dibuja el botón en la pantalla con el color correspondiente al estado actual (normal, hover, o clic) y renderiza el texto centrado.
+        ¿Qué hace? : Dibuja el botón en la pantalla con el color correspondiente al estado actual (normal, hover, o click) y renderiza el texto centrado.
         ¿Qué recibe? :
             - pantalla : pygame.Surface > Superficie en la que se dibuja el botón.
         ¿Qué retorna? : None

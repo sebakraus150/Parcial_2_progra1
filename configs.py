@@ -12,4 +12,7 @@ pantalla_actual = "menu"
 fondo = pygame.image.load("assets/imgs/fondo-campo.jpg")
 fondo = pygame.transform.scale(fondo, (ANCHO, ALTO))
 
+# Titulo
+pygame.display.set_caption("Fulbito")
+
 # Vidas

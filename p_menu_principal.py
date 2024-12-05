@@ -6,6 +6,7 @@ from colores import *
 from p_juego_iniciado import *
 from p_ranking import *
 from p_ingreso import *
+from p_opciones import *
 import pygame.mixer as mixer
 
 pygame.init()
@@ -14,17 +15,15 @@ mixer.init()
 # Funciones de los botones
 def menu_boton_1():
     global pantalla_actual
-    pantalla_actual = "ingreso_nombre"  # Cambiar a la pantalla de ingreso de nombre
+    pantalla_actual = "ingreso_nombre"
 
 def menu_boton_2():
     global pantalla_actual
     pantalla_actual = "ranking"
 
 def menu_boton_3():
-    print("Opciones (pendiente)")
-
-# Configurar la pantalla
-pygame.display.set_caption("Fulbito")
+    global pantalla_actual
+    pantalla_actual = "opciones"
 
 # Instanciación de los botones
 menu_boton1 = Boton(350, 250, 300, 75, "Iniciar Juego", COLOR_BLANCO, COBALT, BLUE, BLUE3, menu_boton_1)
@@ -44,17 +43,17 @@ texto = Texto("FULBITO", tamano_fuente=200, color=COLOR_BLANCO, posicion=(100, 5
 pantalla_actual = "menu"
 
 def menu_principal():
-    '''Función del menú principal que muestra los botones y maneja los eventos de clic.'''
+    '''Función del menú principal que muestra los botones y maneja los eventos de click.'''
     global pantalla_actual
 
     while True:
-        PANTALLA.blit(fondo, (0, 0))  # Fondo del menú
-        texto.dibujar(PANTALLA)  # Texto "FULBITO"
+        PANTALLA.blit(fondo, (0, 0))
+        texto.dibujar(PANTALLA)
 
         # Manejo de eventos
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
-                return "salir"  # Salir del juego
+                return "salir"
             for boton in menu_botones:
                 boton.manejar_evento(evento)
 
@@ -68,7 +67,7 @@ def menu_principal():
         if pantalla_actual != "menu":
             return pantalla_actual
 
-# Ciclo principal del juego
+# Control de pantallas
 while pantalla_actual != "salir":
     if pantalla_actual == "menu":
         pantalla_actual = menu_principal()
@@ -78,5 +77,7 @@ while pantalla_actual != "salir":
         pantalla_actual = pantalla_juego()
     elif pantalla_actual == "ranking":
         pantalla_actual = pantalla_ranking()
+    elif pantalla_actual == "opciones":
+        pantalla_actual = pantalla_opciones()
 
 pygame.quit()

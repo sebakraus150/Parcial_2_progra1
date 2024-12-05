@@ -1,7 +1,6 @@
 import random
-import pygame
-import sys
 from configs import *
+
 #from juego import screen
 
 
@@ -13,10 +12,18 @@ from configs import *
 
 
 def modificar_puntaje(puntaje : int, aciertos: int, aumentar: bool=True, restar: int = 3):
+    '''¿Que hace? : Modifica el puntaje del jugador según si acierta o no, y según la cantidad de aciertos.
+    ¿Que recibe? : 
+    - El puntaje actual del jugador (int).
+    - La cantidad de aciertos (int).
+    - Un booleano (aumentar) que indica si se debe sumar puntos (por defecto True).
+    - La cantidad de puntos a restar si la respuesta es incorrecta (restar, por defecto 3).
+    ¿Que retorna? : El puntaje actualizado después de aplicar las modificaciones.
+    '''
     if aumentar:
-        if aciertos > 10:
+        if aciertos >= 10:
             puntaje+=3
-        elif aciertos >5:
+        elif aciertos >=5:
             puntaje+=2
         else:
             puntaje+=1
@@ -26,25 +33,17 @@ def modificar_puntaje(puntaje : int, aciertos: int, aumentar: bool=True, restar:
             puntaje = 0
     return puntaje
 
-puntaje_inicial = 5
-
-respuesta = True
-
-puntaje_actualizado = modificar_puntaje(puntaje_inicial, respuesta)
-
-print(f"Puntaje actual {puntaje_actualizado}")
-
-respuesta = False
-
-puntaje_actualizado = modificar_puntaje(puntaje_inicial, respuesta)
-
-print(f"Puntaje actual {puntaje_actualizado}")
-
 
 #2. Modificar vidas
 
 def modificar_vidas(respuesta_correcta : str, respuesta_usuario : str):
-    
+    '''
+    ¿Que hace? : Comprueba si la respuesta del usuario es correcta y modifica la cantidad de vidas.
+    ¿Que recibe? : 
+        - La respuesta correcta (str).
+        - La respuesta del usuario (str).
+    ¿Que retorna? : True si las respuestas coinciden, False si no.
+    '''
     return respuesta_usuario == respuesta_correcta
     
 
@@ -69,16 +68,22 @@ def modificar_vidas(respuesta_correcta : str, respuesta_usuario : str):
 #     3:"¿Cuál es el equipo con más participaciones en la historia de la copa sudamericana?"
 # }
 
-
-
 def pregunta_aleatoria(preguntas : dict, dificultad: int=0):
-
+    '''
+    ¿Que hace? : Selecciona una pregunta aleatoria según la dificultad especificada.
+    ¿Que recibe? : Un diccionario con preguntas organizadas por niveles de dificultad y un nivel de dificultad (int, por defecto 0).
+    ¿Que retorna? : Una pregunta seleccionada al azar del nivel de dificultad dado.
+    '''
     pregunta_seleccionada = random.choice(preguntas[dificultad])
 
     return pregunta_seleccionada
 
-
 def eliminar_pregunta(preguntas: list, dificultad: int, pregunta: dict):
+    '''
+    ¿Que hace? : Elimina una pregunta específica de la lista de preguntas según su nivel de dificultad.
+    ¿Que recibe? : Una lista de preguntas organizadas por dificultad (list), un nivel de dificultad (int), y la pregunta a eliminar (dict).
+    ¿Que retorna? : None
+    '''
     if pregunta in preguntas[dificultad]:
         preguntas[dificultad].remove(pregunta)
 
@@ -284,8 +289,13 @@ def jugar_preguntas(preguntas, vidas):
 # mostrar_ranking(ranking)
 
 
-def guardar_estadisticas(nombre : str, puntos : int):
 
+def guardar_estadisticas(nombre : str, puntos : int):
+    '''
+    ¿Que hace? : Guarda las estadísticas del jugador (nombre y puntaje) en el archivo "Estadisticas.txt".
+    ¿Que recibe? : El nombre del jugador (str) y sus puntos (int).
+    ¿Que retorna? : None
+    '''
     with open("Estadisticas.txt", "w") as archivo:
 
         archivo.write(f"{nombre}\n")
@@ -294,7 +304,11 @@ def guardar_estadisticas(nombre : str, puntos : int):
 
 
 def leer_estadisticas():
-
+    '''
+    ¿Que hace? : Lee las estadísticas guardadas en el archivo "Estadisticas.txt" con el nombre y puntaje del jugador.
+    ¿Que recibe? : None
+    ¿Que retorna? : El nombre y los puntos si el archivo existe, o (3, 0, 1) si no se encuentra el archivo.
+    '''
     try:
 
         with open("Estadisticas.txt", "r") as archivo:
@@ -318,8 +332,10 @@ def guardar_puntuacion_ordenada(ranking: list, nuevo_jugador: dict) -> None:
         - puntaje : int > Puntaje del jugador a agregar.
     ¿Qué retorna? : None
     '''
-    print("HOLA ESTO DENTRO")
-    ranking.append(nuevo_jugador)
+    ranking.append(nuevo_jugador.copy())
     ranking.sort(key=lambda x: x["Puntaje"], reverse=True)
     if len(ranking) > 10:
         ranking.pop(-1)
+
+    
+

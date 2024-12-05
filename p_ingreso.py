@@ -12,25 +12,35 @@ def mostrar_ventana_ingreso_nombre():
     ¿Qué recibe? : None
     ¿Qué retorna? : None
     '''
+    global pantalla_actual
+    pantalla_actual = "ingreso_nombre"
     def accion_boton_aceptar():
         '''
         ¿Qué hace? : Guarda el nombre ingresado por el usuario en el diccionario "jugador_actual" y cambia la pantalla actual al juego
-    ¿Qué recibe? : None
-    ¿Qué retorna? : None
+        ¿Qué recibe? : None
+        ¿Qué retorna? : None
         '''
         global pantalla_actual
-        jugador_actual["Nombre Jugador"] = nombre_usuario
+        
+        if len(boton_aceptar.texto) == 0:
+            jugador_actual["Nombre Jugador"] = "Alguien"
+        else:
+            jugador_actual["Nombre Jugador"] = nombre_usuario
+        
         pantalla_actual = "juego"
     
     nombre_usuario = ""
-    texto_ingreso = Texto("Ingresa tu nombre ", tamano_fuente=48, color=WHITE, posicion=(0,300), centrar_horizontal=True)
-    rectangulo = pygame.Rect(ANCHO // 2 - 90, ALTO // 2, 200, 40)  # Rectángulo para ingresar el nombre
-    
-    boton_aceptar = Boton(350, 550,250, 80, "Aceptar", GREEN, BLUE, (0, 0, 128) , BLACK, accion_boton_aceptar)
-    nombre_ingresado = Boton(350,350,250,80,nombre_usuario, COLOR_BLANCO, COBALT, COBALT, COBALT)
+
+    texto_ingreso = Texto("Ingresa tu nombre ", tamano_fuente=70, color=WHITE, posicion=(0,200), centrar_horizontal=True)
+    nombre_ingresado = Boton(300,350,400,80,nombre_usuario, COLOR_BLANCO, COBALT, COBALT, COBALT)
+    boton_aceptar = Boton(375, 550,250, 80, "Aceptar", COLOR_BLANCO, BLUE, COBALT , GREEN, accion_boton_aceptar)
+
+    elemento_dibujar = [texto_ingreso,nombre_ingresado,boton_aceptar]
 
     # Bucle para que el jugador ingrese su nombre
     while True:
+        PANTALLA.blit(fondo, (0, 0))
+
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
                 pygame.quit()
@@ -39,24 +49,16 @@ def mostrar_ventana_ingreso_nombre():
             boton_aceptar.manejar_evento(evento)
 
             if evento.type == pygame.KEYDOWN:
-                if evento.key == pygame.K_RETURN:  # Si presiona Enter
-                    print(nombre_usuario)
-                elif evento.key == pygame.K_BACKSPACE:
+                if evento.key == pygame.K_BACKSPACE:
                     nombre_usuario = nombre_usuario[:-1]
                 else:
                     nombre_usuario += evento.unicode
                 nombre_ingresado.actualizar_texto(nombre_usuario)
 
-        # Dibujar elementos en pantalla
-        PANTALLA.blit(fondo, (0, 0))
-        texto_ingreso.dibujar(PANTALLA)
-        
-        pygame.draw.rect(PANTALLA, WHITE, rectangulo, 2)  # Dibujamos el rectángulo de texto
-        nombre_ingresado.dibujar(PANTALLA)
 
-        # Mostrar botón de aceptar
-        boton_aceptar.dibujar(PANTALLA)
-        
-        pygame.display.update()
+        for elemento in elemento_dibujar:
+            elemento.dibujar(PANTALLA)
+
+        pygame.display.flip()
         if pantalla_actual == "juego":
             return pantalla_actual

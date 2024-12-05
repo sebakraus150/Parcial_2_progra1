@@ -194,6 +194,38 @@ preguntas = [
                 4: 'Lanús'
             },
             'respuesta_correcta': 1
+        },
+        {
+            'pregunta': '¿En qué continente de juega la Nations League?',
+            'opciones': {
+                1: 'Asia',
+                2: 'Europa',
+                3: 'America',
+                4: 'Oceanía'
+            },
+            'respuesta_correcta': 2
+        },
+
+        {
+            'pregunta': '¿Cómo se le llama al goleador del Calcio?',
+            'opciones': {
+                1: 'Capo Cannoniere',
+                2: 'Il Cannoniere',
+                3: 'Goleador',
+                4: 'Paolo Rossi'
+            },
+            'respuesta_correcta': 1
+        },
+
+        {
+            'pregunta': '¿Qué equipo es conocido como "el capo del sur"?',
+            'opciones': {
+                1: 'Lanús',
+                2: 'Los Andes',
+                3: 'Claypole',
+                4: 'Defensa y Justicia'
+            },
+            'respuesta_correcta': 1
         }
     ],
     #endregion
@@ -249,15 +281,38 @@ preguntas = [
             },
             'respuesta_correcta': 3
         },
+
+        {
+            'pregunta': '¿Desde qué area de la cancha se hace el gol olímpico?',
+            'opciones': {
+                1: 'Arco a Arco',
+                2: 'Lateral',
+                3: 'Córner',
+                4: 'Mitad de la cancha'
+            },
+            'respuesta_correcta': 3
+        },
+
+        {
+            'pregunta': '¿Que club es el máximo campeon del amateurismo argentino?',
+            'opciones': {
+                1: 'Alumni',
+                2: 'River',
+                3: 'Boca',
+                4: 'Independiente'
+            },
+            'respuesta_correcta': 1
+        },
+        {
+            'pregunta': '¿Cual de estas jugadas es considerda falta?',
+            'opciones': {
+                1: 'Tirar "el achique"',
+                2: 'Simular dentro del área',
+                3: 'Interceptar',
+                4: 'Meter el cuerpo'
+            },
+            'respuesta_correcta': 2
+        }
     ]
     #endregion
 ]
-
-
-# for i in range(len(preguntas)):
-#     for j in range(len(preguntas[i])):
-#         print(preguntas[i][j]["pregunta"])
-#         print(preguntas[i][j]["opciones"])
-#         print(preguntas[i][j]["respuesta_correcta"])
-#         print()
-

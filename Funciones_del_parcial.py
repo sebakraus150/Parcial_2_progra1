@@ -165,6 +165,12 @@ import random
 #region Mostrar dificultad
 
 def mostrar_dif_preguntas(preguntas : dict):
+    '''
+    ¿Que hace? : Muestra las preguntas y opciones de un diccionario de preguntas, organizadas por niveles de dificultad.
+    ¿Que recibe? : 
+        - preguntas (dict): Un diccionario con preguntas organizadas por niveles de dificultad.
+    ¿Que retorna? : None
+    '''
 
     niveles = ["Fácil", "Media", "Difícil"]
 
